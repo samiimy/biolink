@@ -173,12 +173,16 @@ def render_3d_block(pdb, up):
 
         # Из подписи «лента (cartoon)» берём ключ стиля для 3Dmol.js.
         style_key = style_name.split("(")[1].rstrip(")")
-        view = py3Dmol.view(width=640, height=480)
+        # Ширина '100%' (строка, py3Dmol вставляет её в CSS как есть): холст
+        # растягивается на всю ширину колонки и НЕ вылезает на телефонах.
+        # Фиксированные пиксели (640) ломали мобильную вёрстку — модель
+        # уезжала за правый край узкого экрана.
+        view = py3Dmol.view(width="100%", height=480)
         view.addModel(pdb_text, "pdb")
         view.setStyle({style_key: {"color": "spectrum"}})
         view.zoomTo()
         # Тот же показ, что делает stmol.showmol: HTML-виджет 3Dmol.js в iframe.
-        # iframe растянут на всю ширину карточки; сам холст 3Dmol внутри — 640×480.
+        # iframe растянут на всю ширину карточки; холст 3Dmol внутри — тоже.
         st.components.v1.html(view._make_html(), height=490)
         st.caption(
             "Движок: [3Dmol.js](https://3dmol.csb.pitt.edu). "
