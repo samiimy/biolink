@@ -516,7 +516,7 @@ def render_search_tab():
         render_3d_block(pdb, up)
 
     if card["проблемы_источников"]:
-        with st.expander("Что не удалось получить (честно)"):
+        with st.expander("Что не удалось получить"):
             for problem in card["проблемы_источников"]:
                 st.markdown(f"- {problem}")
 
