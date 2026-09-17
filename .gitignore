@@ -1,0 +1,8 @@
+# Секреты и мусор не должны попадать в репозиторий
+.venv/
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+card_*.json
+card_*.txt
+*.zip
